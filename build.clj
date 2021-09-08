@@ -3,13 +3,17 @@
             [clojure.tools.build.api :as b]
             [clojure.tools.deps.alpha.util.dir :refer [with-dir]]))
 
+(def project-dir (io/file (str (System/getProperty "user.dir") "/projects/example")))
+
 (def lib 'my/lib1)
 (def version (format "1.2.%s" (b/git-count-revs nil)))
 (def class-dir "target/classes")
-(def basis (b/create-basis {:project "deps.edn"}))
+(def basis (with-dir project-dir
+             (b/create-basis {:project "deps.edn"})))
 (def uber-file (format "target/%s-%s-standalone.jar" (name lib) version))
 
-(def project-dir (io/file (str (System/getProperty "user.dir") "/projects/example")))
+(println "paths:" (:paths basis))
+(println "roots:" (:classpath-roots basis))
 
 (defn clean [_]
   (b/delete {:path "target"}))

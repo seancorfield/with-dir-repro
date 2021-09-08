@@ -1,0 +1,4 @@
+{:aliases
+ {:build
+  {:ns-default build :deps
+   {io.github.clojure/tools.build {:git/tag "v0.2.2" :git/sha "3049217"}}}}}

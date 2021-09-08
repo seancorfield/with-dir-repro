@@ -12,6 +12,12 @@
              (b/create-basis {:project "deps.edn"})))
 (def uber-file (format "target/%s-%s-standalone.jar" (name lib) version))
 
+(println "basis default:")
+(let [default (b/create-basis {:project "deps.edn"})]
+  (println "paths:" (:paths default))
+  (println "roots:" (:classpath-roots default)))
+
+(println "basis with-dir projects/example:")
 (println "paths:" (:paths basis))
 (println "roots:" (:classpath-roots basis))
 
